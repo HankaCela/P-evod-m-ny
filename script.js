@@ -1,26 +1,28 @@
-function convertToCZK(amount, currencyCode) {
-    // Kurzy měn
-    const exchangeRates = {
-        EUR: 24.47,
-        GBP: 28.09,
-        USD: 24.81,
-        BTC: 478637
-    };
+const rateCZkEur = 24.47;
+const rateCZkGbp = 28.09;
+const rateCZkUsd = 24.81;
+const rateCZkBtc = 478637;
 
-    // Kontrola, jestli je kód měny v seznamu podporovaných měn
-    const rate = exchangeRates[currencyCode];
-    if (rate === undefined) {
-        return null;
-    }
+const convertToCZK = (amount, currency) => {
+  if (currency.toUpperCase() === "EUR") {
+    return Math.round(amount * rateCZkEur);
+  } else if (currency.toUpperCase() === "GBP") {
+    return Math.round(amount * rateCZkGbp);
+  } else if (currency.toUpperCase() === "USD") {
+    return Math.round(amount * rateCZkUsd);
+  } else if (currency.toUpperCase() === "BTC") {
+    return Math.round(amount * rateCZkBtc);
+  } else return null;
+};
 
-    // Převod a zaokrouhlení výsledku
-    const result = Math.round(amount * rate);
-    return `${result} CZK`;
-}
+document.body.innerHTML += `<h2>Převod 25 EUR do CZK</h2>`;
+document.body.innerHTML += `${convertToCZK(25, "EUR")} CZK`;
 
-// Test funkce
-document.body.innerHTML += convertToCZK(25, 'EUR');  // Očekávaný výstup: "612 CZK"
-document.body.innerHTML += "<br>" + convertToCZK(50, 'GBP');  // Očekávaný výstup: "1405 CZK"
-document.body.innerHTML += "<br>" + convertToCZK(100, 'USD'); // Očekávaný výstup: "2481 CZK"
-document.body.innerHTML += "<br>" + convertToCZK(0.01, 'BTC'); // Očekávaný výstup: "4786 CZK"
-document.body.innerHTML += "<br>" + convertToCZK(30, 'JPY');   // Očekávaný výstup: null
+document.body.innerHTML += `<h2>Převod 25 GBP do CZK</h2>`;
+document.body.innerHTML += `${convertToCZK(25, "GBP")} CZK`;
+
+document.body.innerHTML += `<h2>Převod 25 USD do CZK</h2>`;
+document.body.innerHTML += `${convertToCZK(25, "USD")} CZK`;
+
+document.body.innerHTML += `<h2>Převod 25 BTC do CZK</h2>`;
+document.body.innerHTML += `${convertToCZK(25, "BTC")} CZK`;
